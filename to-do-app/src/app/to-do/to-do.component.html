@@ -1,0 +1,26 @@
+<div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="toDo">
+  <div class="input-group-append">
+    <button class="btn btn-success" type="button" (click)="addToDo()">Add To Do</button>
+  </div>
+</div>
+
+<ul class="list-group mb-4">
+  <li *ngFor="let toDo of filterToDoOfType(filterType); index as i" [class.completed]="toDo.isCompleted" (click)="onToDoClicked(toDo)"class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+    {{i + 1}}: {{toDo.name}}
+    <span class="btn btn-danger" (click)="removeToDo(i)">x</span>
+  </li>
+</ul>
+
+<!-- 
+<ul class="list-group">
+  <li *ngFor="let toDo of toDoList; index as i" [class.bg-secondary]="toDo.isCompleted" (click)="onToDoClicked(toDo)"class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+    <p *ngIf="filterType == 'all' || (filterType =='completed' && toDo.isCompleted) || (filterType == 'to-do' && !toDo.isCompleted)">{{i + 1}}: {{toDo.name}}<span class="btn btn-danger" (click)="removeToDo(i)">x</span></p>
+  </li>
+</ul> -->
+
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary" (click)="filterToDo('all')">All</button>
+  <button type="button" class="btn btn-secondary" (click)="filterToDo('completed')">Completed</button>
+  <button type="button" class="btn btn-secondary" (click)="filterToDo('to-do')">To Do</button>
+</div>
