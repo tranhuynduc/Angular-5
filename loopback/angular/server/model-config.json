@@ -38,5 +38,9 @@
   "article": {
     "dataSource": "db",
     "public": true
+  },
+  "hero": {
+    "dataSource": "db",
+    "public": true
   }
 }

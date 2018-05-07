@@ -9,7 +9,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable()
 export class UserService {
   private usersUrl = 'api/users';  // URL to web api
-  private baseURL = 'https://jsonplaceholder.typicode.com/users';
+  private baseURL = 'http://localhost:3000/api/heros';
+  private jsonURL = 'https://jsonplaceholder.typicode.com/users';
 
   constructor(
     private messageService: MessageService,
@@ -20,8 +21,20 @@ export class UserService {
     this.messageService.add('UserService: ' + message);
   }
 
+  checkUser(name): Observable<any> {
+    let data = {
+      "where": JSON.stringify({
+        "name": name
+      })
+    }
+    return this.http.get(this.baseURL + '/count', {params: data})
+      .pipe(
+        
+        catchError(this.handleError('getUsers', [])) 
+      );
+  }
   getUsers(): Observable<any> {
-    return this.http.get('https://jsonplaceholder.typicode.com/posts')
+    return this.http.get(this.baseURL)
           .pipe( 
             tap(users => console.log(users)),
             catchError(this.handleError('getUsers', [])) 
