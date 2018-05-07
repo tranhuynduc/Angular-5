@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+.coral, a, a.coral,
+a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover,
+a:not([href]):not([tabindex]), {
+  color: coral;
+  transition: color .3s;
+  cursor: pointer;
+  &:hover {
+    color: #a52c00;
+    text-decoration: none;
+  }
+
+  &.active {
+    background: coral;
+    color: white;
+  }
+}
