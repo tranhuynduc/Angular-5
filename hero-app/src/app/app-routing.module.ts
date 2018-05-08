@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { ArticlesResolver } from './articles/articles-resolver.service';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
 
 const routes: Routes = [
   { 
@@ -34,6 +35,12 @@ const routes: Routes = [
         resolve: {
           data: ArticlesResolver
         },
+        children: [
+          {
+            path: ':id',
+            component: ArticleDetailComponent
+          }
+        ]
       },
       
     ]

@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-md-4">
       <ul class="list-group mb-4">
-        <button type="button" class="list-group-item list-group-item-action" *ngFor="let article of articles; index as i" (click)="onSelect(article)">{{i}} {{article.name}}
-          <span (click)="deleteArticle(article.id)" class="btn btn-danger btn-sm float-right">X</span></button>
+        <a [routerLink]="['./', article.id]" class="list-group-item list-group-item-action" *ngFor="let article of articles; index as i" (click)="onSelect(article)">{{i}} {{article.name}}
+          <span (click)="deleteArticle($event, article.id)" class="btn btn-danger btn-sm float-right">X</span></a>
       </ul>
 
       <h2>Add more acticle</h2>
@@ -15,7 +15,8 @@
   
     </div>
     <div class="col-md-8">
-      <app-article-detail [article]="selectedArticle"></app-article-detail>
+      <router-outlet></router-outlet>
+      <!-- <app-article-detail [article]="selectedArticle"></app-article-detail> -->
     </div>
   </div>
 </div>

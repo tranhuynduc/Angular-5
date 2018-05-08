@@ -1,3 +1,10 @@
-<div *ngIf="article">
+<div *ngIf="article$ | async as article">
   <h2>{{article.id}} {{article.name}}</h2>
+  <button *ngIf="!isEdit" (click)="onEdit()" class="btn btn-primary">Edit</button>
+  
+  <form *ngIf="isEdit" class="form-group">
+    <label for="article-name">Edit Articles Name</label>
+    <input class="form-control" type="text" id="article-name" name="article-name" [(ngModel)]="article.name" />
+    <button class="btn btn-success my-2" (click)="editArticle(article)">Add article</button>
+  </form>
 </div>

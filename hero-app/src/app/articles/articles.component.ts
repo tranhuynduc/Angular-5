@@ -1,17 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Article } from '../article';
 import { RestService } from '../rest.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { slideInDownAnimation } from '../animations';
 
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.less']
+  styleUrls: ['./articles.component.less'],
+  animations: [ slideInDownAnimation ]
+  
 })
 export class ArticlesComponent implements OnInit {
   articles: Article[] = null;
   selectedArticle: Article = null;
   articleName = '';
+
+  @HostBinding('@routeAnimation') routeAnimation = true;
+  @HostBinding('style.display')   display = 'block';
   constructor(
     private restService: RestService,
     private router: Router,
@@ -49,7 +55,8 @@ export class ArticlesComponent implements OnInit {
     
   }
 
-  deleteArticle(id) {
+  deleteArticle($event, id) {
+    $event.stopPropagation();
     const url  = `articles/${id}`;
     this.restService.deleteData(url).subscribe(
       data => {
@@ -59,6 +66,7 @@ export class ArticlesComponent implements OnInit {
         });
       }
     )
+    return false;
   }
 
   onSelect(article: Article) {
