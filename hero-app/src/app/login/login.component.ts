@@ -12,10 +12,12 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
   name: string = '';
+  password: string = '';
+  message: string = '';
   constructor(
     private authService: AuthService,
     private router: Router,
-    private userSerivce: UserService
+    private userSerivce: UserService,
   ) { }
 
   ngOnInit() {
@@ -23,13 +25,21 @@ export class LoginComponent implements OnInit {
 
 
   signIn() {
-    let count = 0
-    
-    this.userSerivce.checkUser(this.name).subscribe(data => {
-      count = data.count;
-      console.log('count2');
-    });
+    if (this.password === '' || this.name === '') {
+      return this.message = 'Username and password can\'t be blank';
+    }
+    this.userSerivce.getUser(this.name).subscribe(data => {
+      if (!data.length) {
+        return this.message = 'User name doesn\'t exist';
+      }
+      
+      if (this.password !== data[0].password) {
+        return this.message = 'Password is incorrect';
+      }
 
-    console.log('count');
+      this.message = 'login success';
+      this.authService.login(data[0].name);
+      this.router.navigate(['/']);
+    });
   }
 }

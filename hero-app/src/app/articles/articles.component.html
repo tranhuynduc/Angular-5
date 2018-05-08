@@ -1,0 +1,23 @@
+<div class="contain">
+  <div class="row">
+    <div class="col-md-4">
+      <ul class="list-group mb-4">
+        <button type="button" class="list-group-item list-group-item-action" *ngFor="let article of articles; index as i" (click)="onSelect(article)">{{i}} {{article.name}}
+          <span (click)="deleteArticle(article.id)" class="btn btn-danger btn-sm float-right">X</span></button>
+      </ul>
+
+      <h2>Add more acticle</h2>
+      <form class="form-group">
+        <label for="article-name">Article Name</label>
+        <input class="form-control" type="text" id="article-name" name="article-name" [(ngModel)]="articleName" />
+        <button class="btn btn-success my-2" (click)="addArticle()">Add article</button>
+      </form>
+  
+    </div>
+    <div class="col-md-8">
+      <app-article-detail [article]="selectedArticle"></app-article-detail>
+    </div>
+  </div>
+</div>
+
+

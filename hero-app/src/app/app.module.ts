@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +23,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ArticlesComponent } from './articles/articles.component';
+import { RestService } from './rest.service';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
 
 @NgModule({
   declarations: [
@@ -34,15 +38,18 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     SidebarComponent,
     LoginComponent,
     RegisterComponent,
-    NavBarComponent
+    NavBarComponent,
+    ArticlesComponent,
+    ArticleDetailComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
   ],
-  providers: [UserService, MessageService, AuthGuardService, AuthService],
+  providers: [UserService, MessageService, AuthGuardService, AuthService, RestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
+  
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
@@ -16,7 +17,11 @@ export class AppComponent {
 
   
   ngOnInit() {
-    this.isSignIn = this.authService.login();
+    this.checkAuth();
+  }
+
+  checkAuth() {
+    this.authService.checkLogin();    
   }
 
   signOut() {

@@ -1,14 +1,14 @@
-
-<div class="row">
-  <div class="col-md-2">
-    <nav  then Block class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-       <a class="nav-link" routerLink="/dashboard">Dashboard</a>
-      <a class="nav-link" routerLink="/dashboard/heroes">Heroes</a>
-      <a class="nav-link" (click)="signOut()">Sign Out</a>
-
-    </nav>
-  </div>
-  <div class="col-md-10">
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-2">
+      <nav class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+        <a class="nav-link" routerLink="/dashboard/articles">Articles</a>
+      </nav>
+    </div>
+    <div class="col-md-10">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
 <!-- 

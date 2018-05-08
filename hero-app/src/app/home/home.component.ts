@@ -31,13 +31,6 @@ export class HomeComponent implements OnInit {
   }
 
   checkLogin() {
-    if (this.authService.isLogin()) {
-      this.navItems = [
-        {
-          name: 'Setting',
-          link: '/setting',
-        }
-      ]
-    }
+
   }
 }

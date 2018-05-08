@@ -10,6 +10,8 @@
       <label for="password">Password</label>
       <input type="password" name="password" class="form-control" id="password" [(ngModel)]="password" placeholder="Password">
     </div>
-    <button type="submit" class="btn btn-md btn-success float-md-right" (click)="signIn()">Register</button>
+    <button type="submit" class="btn btn-md btn-success float-md-right" (click)="register()">Register</button>
   </form>
+
+  <h2>{{message}}</h2>
 </div>

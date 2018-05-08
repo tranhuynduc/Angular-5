@@ -6,6 +6,7 @@ import { of } from 'rxjs/observable/of';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Headers } from '@angular/http';
 @Injectable()
 export class UserService {
   private usersUrl = 'api/users';  // URL to web api
@@ -53,13 +54,28 @@ export class UserService {
     };
   }
 
-  getUser(id: number): Observable<User> {
-    const url = `${this.usersUrl}/${id}`;
+  createUser(data) {
+    return this.http.post(this.baseURL, data, this.getHeaderOptions())
+    .pipe( 
+      tap(users => console.log('create user', users)),
+      catchError(this.handleError('getUsers', [])) 
+    );
+  }
+  getUser(name: string): Observable<User[]> {
+    const url = `${this.baseURL}/findOne`;
+
+    let params = {
+      "filter": JSON.stringify({
+        "where": {
+        "name": name
+        }
+      })
+    }
     // TODO: send the message _after_ fetching the user
-    return this.http.get<User>(url)
+    return this.http.get<User[]>(this.baseURL, {params})
       .pipe(
-        tap(_ => this.log('fetched user id=${id}')),
-        catchError(this.handleError<User>('getUser id=${id}'))
+        tap(_ => this.log('fetched user name=${name}')),
+        catchError(this.handleError<User[]>('getUser name=${name}'))
       )
   }
 
@@ -67,7 +83,8 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    return this.http.put(this.usersUrl, user, httpOptions).pipe(
+    return this.http.put(this.usersUrl, user, httpOptions)
+      .pipe(
       tap(_ => this.log(`updated user id=${user.id}`)),
       catchError(this.handleError<any>('updateUser'))
     );
@@ -104,5 +121,13 @@ export class UserService {
       tap(_ => this.log(`found users matching "${term}"`)),
       catchError(this.handleError<User[]>('searchUseres', []))
     );
+  }
+
+  getHeaderOptions(type = 'application/json') {
+    return {
+      headers: new HttpHeaders ({
+        'Content-Type': type
+      })
+    }
   }
 }

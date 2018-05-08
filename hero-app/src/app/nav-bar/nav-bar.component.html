@@ -1,12 +1,18 @@
-<ul class="nav justify-content-end">
+<ul *ngIf="isLogin" class="nav justify-content-end">
   <li class="nav-item">
     <a class="nav-link" routerLinkActive="active" routerLink="/dashboard">Dashboard</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" (click)="logOut()">Logout</a>
+  </li>
+
+</ul>
+
+<ul *ngIf="isLogin === false" class="nav justify-content-end">
   <li class="nav-item">
     <a class="nav-link" routerLinkActive="active" routerLink="/login">Sign In</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" routerLinkActive="active" routerLink="/register">Sign Up</a>
   </li>
-
 </ul>

@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ArticlesComponent } from './articles/articles.component';
 
 const routes: Routes = [
   { 
@@ -20,6 +21,16 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    children: [
+      {
+        path: 'articles',
+        component: ArticlesComponent
+      }
+    ]
   },
   { path: '**', component: PageNotFoundComponent },
   

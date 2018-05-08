@@ -18,7 +18,6 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getHeroes();
   }
 
   getHeroes(): void {
