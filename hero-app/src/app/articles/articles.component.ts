@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../article';
 import { RestService } from '../rest.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-articles',
@@ -13,21 +14,28 @@ export class ArticlesComponent implements OnInit {
   articleName = '';
   constructor(
     private restService: RestService,
-    
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.getArticleList();
   }
-  
   getArticleList() {
-    console.log('get');
-    return this.restService.getData('articles').subscribe(
-      data => {
-        this.articles = data;
-      }
-    )
+    this.route.data
+    .subscribe((data) => {
+      this.articles = data.data;
+    });
   }
+  
+  // getArticleList() {
+  //   console.log('get');
+  //   return this.restService.getData('articles').subscribe(
+  //     data => {
+  //       this.articles = data;
+  //     }
+  //   )
+  // }
 
   addArticle() {
     if (this.articleName === '') {

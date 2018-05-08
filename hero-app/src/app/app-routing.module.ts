@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ArticlesComponent } from './articles/articles.component';
+import { ArticlesResolver } from './articles/articles-resolver.service';
 
 const routes: Routes = [
   { 
@@ -25,11 +26,16 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+
     children: [
       {
         path: 'articles',
-        component: ArticlesComponent
-      }
+        component: ArticlesComponent,
+        resolve: {
+          data: ArticlesResolver
+        },
+      },
+      
     ]
   },
   { path: '**', component: PageNotFoundComponent },
@@ -38,6 +44,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    ArticlesResolver
+  ]
 })
 export class AppRoutingModule { }
